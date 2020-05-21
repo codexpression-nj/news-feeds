@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title>
+      News
+    </ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar color="dark">
+    <ion-searchbar [(ngModel)]="searchTerm" showCancelButton="focus" (ionChange)="searchNews()"> </ion-searchbar>
+  </ion-toolbar>
+  <ion-toolbar color="dark">
+    <ion-segment scrollable (ionChange)="searchByCategory($event)">
+      <ion-segment-button value="general">
+        <ion-label>General</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="business">
+        <ion-label>Business</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="entertainment">
+        <ion-label>Entertainment</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="health">
+        <ion-label>Health</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="technology">
+        <ion-label>Technology</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+ 
+</ion-header>
+
+<ion-content [fullscreen]="true" color="dark">
+ 
+  <ion-card *ngFor="let article of articles" (click)="readNews(article)" >
+      <ion-item>
+        <ion-thumbnail slot="end">
+          <img [src]="article.urlToImage"/>
+        </ion-thumbnail>
+        <span style="font-weight: 400;">{{article.title}}</span>
+      </ion-item>
+      <ion-card-content>
+        <p style="font-weight: 300; font-size: 0.9em;">
+          {{article.description}}
+        </p>
+        <ion-item line="none">
+          <ion-label>
+            {{article.source.name}}
+          </ion-label>
+          <p>
+            {{article.publishedAt | date}}
+          </p>
+        </ion-item>
+      
+      </ion-card-content> 
+  </ion-card>
+</ion-content>
